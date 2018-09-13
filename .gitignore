@@ -1,0 +1,11 @@
+db.*
+dbs/
+logs/
+
+.idea/
+db.sqlite3
+__pycache__
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
