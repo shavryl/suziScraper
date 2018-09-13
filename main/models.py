@@ -1,8 +1,11 @@
 from django.db import models
 
-class Quote(models.Model):
+
+class BottomData(models.Model):
     """
     The scrapped data will be saved in this model
     """
-    text = models.TextField()
-    author = models.CharField(max_length=512)
+    title = models.CharField(max_length=512)
+    price = models.CharField(max_length=512)
+    color = models.CharField(max_length=512)
+    sizes = models.CharField(max_length=512)

@@ -1,14 +1,10 @@
-# -*- coding: utf-8 -*-
-
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-from main.models import Quote
+from main.models import BottomData
 
 
-class ScrapyAppPipeline(object):
+class ScrapyAppPipeline:
+
     def process_item(self, item, spider):
-        quote = Quote(text=item.get('text'), author=item.get('author'))
-        quote.save()
+        data = BottomData(title=item.get('title'), price=item.get('price'),
+                          color=item.get('color'), sizes=item.get('sizes'))
+        data.save()
         return item
