@@ -31,7 +31,7 @@ and spider_2:
 curl http://localhost:6800/schedule.json -d project=default -d spider=exclusives
 ````
 then open http://127.0.0.1:6800/jobs to check jobs process.
-The crawled data will be automatically be saved in the Django models
+The crawled data will be automatically saved in the Django models
 (it was cool to get experience with scrapy)
 
 ## After finished:
