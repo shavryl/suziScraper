@@ -1,15 +1,17 @@
-BOTTOMS_SELECTOR = '.product-tile-image a ::attr("href")'
+SELECTOR = '.product-tile-image a ::attr("href")'
 
-TITLE_SELECTOR = ".header.product__header::text"
+TITLE = ".header.product__header::text"
 
-PRICE_SELECTOR = "//span[@class='product__price  js-product-price']//text()"
+BOTTOMS_PRICE = "//span[@class='product__price  js-product-price']//text()"
 
-NEXT_PAGE = '/html/body/div[3]/div[2]/main/div[2]/section/div[2]/div/div/a/span'
+NEXT_PAGE = '//a[contains(@class, "pagination-button pagination-button-next")]/@href'
 
-PRODUCT_SELECTOR = '/html/body/div[3]/div[2]/main/div[1]/div'
+BOTTOMS_COLOR = '//label[contains(@class,"product__radio radio-color")]/@data-value'
 
-COLOR_SELECTOR = '//label[contains(@class, "product__radio radio-color")]//text()'
+BOTTOMS_SIZE = '//div[contains(@class, "product__radio")]//text()'
 
-SIZE_SELECTOR = '//div[contains(@class, "product__radio")]//text()'
+BOTTOMS_DESCRIPTION = '//*[@id="toggle-product__description"]//text()'
 
-css = '.label.radio-color::text'
+BOTTOMS_SPECS = '//*[@id="toggle-product__specs"]/ul/li//text()'
+
+EXCLUSIVES_PRICE = ".product__price::text"

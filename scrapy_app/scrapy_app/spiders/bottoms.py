@@ -1,6 +1,6 @@
 import scrapy
-from .constants import BOTTOMS_SELECTOR, TITLE_SELECTOR, PRICE_SELECTOR, \
-    NEXT_PAGE, SIZE_SELECTOR, COLOR_SELECTOR, css
+from .constants import SELECTOR, TITLE, BOTTOMS_PRICE, \
+    NEXT_PAGE, BOTTOMS_SIZE, BOTTOMS_COLOR, BOTTOMS_DESCRIPTION, BOTTOMS_SPECS
 
 
 class ScrapeBottoms(scrapy.Spider):
@@ -11,7 +11,7 @@ class ScrapeBottoms(scrapy.Spider):
 
     def parse(self, response):
 
-        for bottom_url in response.css(BOTTOMS_SELECTOR).extract():
+        for bottom_url in response.css(SELECTOR).extract():
             yield response.follow(bottom_url, callback=self.parse_product)
 
         next_page_url = response.xpath(NEXT_PAGE).extract_first()
@@ -19,14 +19,14 @@ class ScrapeBottoms(scrapy.Spider):
         if next_page_url is not None:
             yield scrapy.Request(response.urljoin(next_page_url))
 
-    def parse_product(self, response):
+    @staticmethod
+    def parse_product(response):
 
         yield {
-            'title': response.css(TITLE_SELECTOR).extract_first(),
-            'price': ''.join(response.xpath(PRICE_SELECTOR).re(r'[\d.,]+')),
-            'color': response.css(css).extract(),
-            'sizes': response.xpath(SIZE_SELECTOR).extract(),
-            # 'specs'
-            # 'description'
-
+            'title': response.css(TITLE).extract_first(),
+            'price': ''.join(response.xpath(BOTTOMS_PRICE).re(r'[\d.,]+')),
+            'color': response.xpath(BOTTOMS_COLOR).extract(),
+            'sizes': response.xpath(BOTTOMS_SIZE).extract(),
+            'description': response.xpath(BOTTOMS_DESCRIPTION).extract_first().strip(),
+            'specs': response.xpath(BOTTOMS_SPECS).extract()
         }
