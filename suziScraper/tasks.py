@@ -16,6 +16,7 @@ def add(x, y):
              retry_kwargs={'max_retries': 5})  # retry in 30 minutes.
 def ask_exc(self, x, y):
     try:
+        # to get exception for retries
         something_raising()
     except Exception as exc:
         # overrides the default delay to retry after 1 minute
