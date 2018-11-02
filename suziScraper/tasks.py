@@ -26,3 +26,15 @@ def ask_exc(self, x, y):
 @shared_task
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
+
+
+@shared_task(bind=True)
+def upload_files(self, filenames):
+    """
+    created custom state 'PROGRESS'
+    can be used to create progress bar
+    """
+    for i, file in enumerate(filenames):
+        if not self.request.called_directly:
+            self.update_state(state='PROGRESS',
+                meta={'current': i, 'total': len(filenames)})
