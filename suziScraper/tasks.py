@@ -1,12 +1,14 @@
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 from celery.utils.log import get_task_logger
+from suziScraper.celery import app
+import os
 
 
 logger = get_task_logger(__name__)
 
 
-@shared_task()
+@app.task
 def add(x, y):
     logger.info('Adding {0} + {1}'.format(x, y))
     return x + y
@@ -38,3 +40,18 @@ def upload_files(self, filenames):
         if not self.request.called_directly:
             self.update_state(state='PROGRESS',
                 meta={'current': i, 'total': len(filenames)})
+
+
+@app.task
+def log_error(request, exc, traceback):
+    with open(os.path.join('/suziScraper/errors', request.id), 'a') as fh:
+        print('--\n\n{0}  {1}  {2}'.format(
+            id, exc, traceback), file=fh)
+
+
+@app.task
+def xsum(arglist):
+    sum = 0
+    for i in arglist:
+        sum = sum + i
+    return sum
