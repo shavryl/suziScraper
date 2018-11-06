@@ -46,12 +46,9 @@ def upload_files(self, filenames):
 def log_error(request, exc, traceback):
     with open(os.path.join('/suziScraper/errors', request.id), 'a') as fh:
         print('--\n\n{0}  {1}  {2}'.format(
-            id, exc, traceback), file=fh)
+            request.id, exc, traceback), file=fh)
 
 
 @app.task
-def xsum(arglist):
-    sum = 0
-    for i in arglist:
-        sum = sum + i
-    return sum
+def xsum(numbers):
+    return sum(numbers)
