@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 from celery.utils.log import get_task_logger
+from celery.schedules import crontab
 from suziScraper.celery import app
 import os
 
@@ -52,3 +53,19 @@ def log_error(request, exc, traceback):
 @app.task
 def xsum(numbers):
     return sum(numbers)
+
+
+@app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    sender.add_periodic_task(10.0, test.s('hello'), name='add every 10')
+    sender.add_periodic_task(30.0, test.s('world'), expires=10)
+    # executes every monday morning at 8:30 am
+    sender.add_periodic_task(
+        crontab(hour=8, minute=30, day_of_week=1),
+        test.s('Happy Mondays!'),
+    )
+
+
+@app.task
+def test(arg):
+    print(arg)
