@@ -27,22 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Celery settings
-
-CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
-
-#: Only add pickle to this list if your broker is secured
-#: from unwanted access (see userguide/security.html)
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_RESULT_BACKEND = "redis"
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
-REDIS_DB = 0
-REDIS_CONNECT_RETRY = True
-CELERY_TASK_SERIALIZER = 'json'
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -52,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
     'main',
     'suziScraper',
     'rest_framework',
@@ -123,6 +108,27 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# Celery settings
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_BACKEND = "redis"
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
+REDIS_DB = 0
+REDIS_CONNECT_RETRY = True
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERYBEAT_SCHEDULE = {
+    "add-every-30-seconds": {
+        "task": "tasks.add",
+        "schedule": 30.0,
+        "args": (16, 16)
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
