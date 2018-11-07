@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from celery.schedules import crontab
-from suziScraper.celery import app
+from suziScraper.celeryapp import app
 import os
 
 
