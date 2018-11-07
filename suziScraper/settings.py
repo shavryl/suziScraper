@@ -122,6 +122,7 @@ REDIS_DB = 0
 REDIS_CONNECT_RETRY = True
 CELERY_TASK_SERIALIZER = 'json'
 
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers.DatabaseScheduler"
 CELERYBEAT_SCHEDULE = {
     "add-every-30-seconds": {
         "task": "tasks.add",
