@@ -3,10 +3,13 @@ from celery import shared_task
 from celery.utils.log import get_task_logger
 from celery.schedules import crontab
 from suziScraper.celeryapp import app
+import urllib.request
 import os
 
 
 logger = get_task_logger(__name__)
+
+URL = 'https://finance.yahoo.com/currencies'
 
 
 @app.task
@@ -69,3 +72,10 @@ def setup_periodic_tasks(sender, **kwargs):
 @app.task
 def test(arg):
     print(arg)
+
+
+@app.task
+def get_rate(pair, url_tmplt=URL):
+    with urllib.request.urlopen(url_tmplt.format(pair)) as res:
+        body = res.read()
+    return (pair, float(body.strip()))
