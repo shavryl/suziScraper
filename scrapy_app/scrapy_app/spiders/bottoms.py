@@ -1,5 +1,5 @@
 import scrapy
-from .constants import SELECTOR, TITLE, BOTTOMS_PRICE, \
+from scrapy_app.scrapy_app.spiders.constants import SELECTOR, TITLE, BOTTOMS_PRICE, \
     NEXT_PAGE, BOTTOMS_SIZE, BOTTOMS_COLOR, BOTTOMS_DESCRIPTION, BOTTOMS_SPECS
 
 

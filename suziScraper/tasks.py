@@ -5,11 +5,23 @@ from celery.schedules import crontab
 from suziScraper.celeryapp import app
 import urllib.request
 import os
+from scrapy.crawler import CrawlerProcess
+from scrapy_app.scrapy_app.spiders.bottoms import ScrapeBottoms
 
 
 logger = get_task_logger(__name__)
 
 URL = 'https://finance.yahoo.com/currencies'
+
+
+@app.task
+def scrape_bottoms():
+    process = CrawlerProcess({
+        'USER_AGENT': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0)'
+    })
+
+    process.crawl(ScrapeBottoms)
+    process.start()
 
 
 @app.task

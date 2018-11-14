@@ -110,13 +110,6 @@ REDIS_CONNECT_RETRY = True
 CELERY_TASK_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
-CELERYBEAT_SCHEDULE = {
-    'add-every-30-seconds': {
-        'task': 'tasks.add',
-        'schedule': 30.0,
-        'args': (16, 16)
-    },
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
