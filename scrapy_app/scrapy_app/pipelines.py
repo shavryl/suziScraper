@@ -8,7 +8,7 @@ class ScrapyAppPipeline:
         if spider.name == 'bottoms':
             data = BottomData(title=item.get('title'), price=item.get('price'),
                               color=item.get('color'), sizes=item.get('sizes'),
-                              description=item.get('description'), specs=item.get('specs'))
+                              specs=item.get('specs'))
             data.save()
             return item
 

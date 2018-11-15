@@ -1,5 +1,5 @@
 import scrapy
-from scrapy_app.scrapy_app.spiders.constants import SELECTOR, TITLE, BOTTOMS_PRICE, \
+from .constants import SELECTOR, TITLE, BOTTOMS_PRICE, \
     NEXT_PAGE, BOTTOMS_SIZE, BOTTOMS_COLOR, BOTTOMS_DESCRIPTION, BOTTOMS_SPECS
 
 
@@ -27,6 +27,6 @@ class ScrapeBottoms(scrapy.Spider):
             'price': ''.join(response.xpath(BOTTOMS_PRICE).re(r'[\d.,]+')),
             'color': response.xpath(BOTTOMS_COLOR).extract(),
             'sizes': response.xpath(BOTTOMS_SIZE).extract(),
-            'description': response.xpath(BOTTOMS_DESCRIPTION).extract_first().strip(),
+            # 'description': response.xpath(BOTTOMS_DESCRIPTION).extract_first().strip(),
             'specs': response.xpath(BOTTOMS_SPECS).extract()
         }

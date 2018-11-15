@@ -11,8 +11,6 @@ from scrapy_app.scrapy_app.spiders.bottoms import ScrapeBottoms
 
 logger = get_task_logger(__name__)
 
-URL = 'https://finance.yahoo.com/currencies'
-
 
 @app.task
 def scrape_bottoms():
