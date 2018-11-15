@@ -7,7 +7,6 @@ class BottomData(models.Model):
     price = models.CharField(max_length=512)
     color = models.CharField(max_length=512)
     sizes = models.CharField(max_length=512)
-    description = models.CharField(max_length=512)
     specs = models.CharField(max_length=512)
 
 

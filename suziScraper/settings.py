@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'celerybeat_status',
     'main',
+    'djkombu',
     'suziScraper',
     'rest_framework',
     'snippets'
@@ -102,11 +103,7 @@ CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
 #: Only add pickle to this list if your broker is secured
 #: from unwanted access (see userguide/security.html)
 CELERY_ACCEPT_CONTENT = ['json']
-CELERY_RESULT_BACKEND = 'redis'
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
-REDIS_DB = 0
-REDIS_CONNECT_RETRY = True
+CELERY_RESULT_BACKEND = 'db+mysql+mysqldb://root:root@localhost:3306/suzi'
 CELERY_TASK_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'

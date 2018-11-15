@@ -1,4 +1,6 @@
 import scrapy
+from scrapy.signals import item_scraped
+from scrapy.crawler import CrawlerProcess
 from .constants import SELECTOR, TITLE, BOTTOMS_PRICE, \
     NEXT_PAGE, BOTTOMS_SIZE, BOTTOMS_COLOR, BOTTOMS_DESCRIPTION, BOTTOMS_SPECS
 
