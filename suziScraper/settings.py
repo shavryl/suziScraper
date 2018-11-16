@@ -99,6 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Celery settings
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
+BROKER_TRANSPORT = "djkombu.transport.DatabaseTransport"
 
 #: Only add pickle to this list if your broker is secured
 #: from unwanted access (see userguide/security.html)
